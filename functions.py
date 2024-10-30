@@ -91,18 +91,19 @@ def ParticleBeam_to_Dist(cheetah_beam):
 
     Returns: dictionary specifying the beam distribution
     """
-    # x = cheetah_beam.x.numpy().reshape(-1)
-    # y = cheetah_beam.y.numpy().reshape(-1)
-    # px = cheetah_beam.px.numpy().reshape(-1)
-    # py = cheetah_beam.py.numpy().reshape(-1)
-    # z = cheetah_beam.tau.numpy().reshape(-1)
-    # pz = cheetah_beam.p.numpy().reshape(-1)
-    # energy = cheetah_beam.energy.numpy()
-    # charge = cheetah_beam.total_charge.numpy()
-
-    # dist = {'x':x,'y':y,'px':px,'py':py,'z':z,'pz':pz,'energy':energy,'charge':charge}
-
-    dist = particles_to_dist(torch.transpose(cheetah_beam.particles,0,1),cheetah_beam.energy,cheetah_beam.total_charge)
+    try:
+        x = cheetah_beam.x.numpy().reshape(-1)
+        y = cheetah_beam.y.numpy().reshape(-1)
+        px = cheetah_beam.px.numpy().reshape(-1)
+        py = cheetah_beam.py.numpy().reshape(-1)
+        z = cheetah_beam.tau.numpy().reshape(-1)
+        pz = cheetah_beam.p.numpy().reshape(-1)
+        energy = cheetah_beam.energy.numpy()
+        charge = cheetah_beam.total_charge.numpy()
+    
+        dist = {'x':x,'y':y,'px':px,'py':py,'z':z,'pz':pz,'energy':energy,'charge':charge}
+    except:
+        dist = particles_to_dist(torch.transpose(cheetah_beam.particles,0,1),cheetah_beam.energy,cheetah_beam.total_charge)
     return dist
 
 

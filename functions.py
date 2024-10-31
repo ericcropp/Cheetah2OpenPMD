@@ -127,13 +127,13 @@ def dist_to_ParticleGroup(dist):
     beta_z = np.sqrt(1 - 1 / gamma**2)
     # c = 3e8
     data = {
-        'x': dist['x'],
-        'y': dist['y'],
-        'z': dist['z'],
-        'px': dist['px'] * p_ref,
-        'py': dist['py'] * p_ref,
-        'pz': (1 + dist['pz']) * p_ref,
-        't': dist['z']/(beta_z*c),
+        'x': dist['x'].astype(np.float64),
+        'y': dist['y'].astype(np.float64),
+        'z': dist['z'].astype(np.float64),
+        'px': dist['px'].astype(np.float64) * p_ref.astype(np.float64),
+        'py': dist['py'].astype(np.float64) * p_ref.astype(np.float64),
+        'pz': (1 + dist['pz'].astype(np.float64)) * p_ref.astype(np.float64),
+        't': dist['z'].astype(np.float64)/(beta_z.astype(np.float64)*c),
         'weight': np.ones_like(dist['x']).reshape(-1) / dist['x'].shape[0] * dist['charge'],
         'status': np.ones_like(dist['x']).reshape(-1),
         'species': 'electron'

@@ -76,9 +76,11 @@ def ParameterBeam_to_Dist(n,ParameterBeam):
     cov_mat = np.squeeze(ParameterBeam._cov.numpy())[:6,:6]
     dist_mat = Gaussian_Dist_From_Cov_Mat(n,cov_mat) 
 
+    mu_mat = np.squeeze(ParameterBeam._mu.numpy())
+
     # Add back the mean in each dimension
     for i in range(np.shape(dist_mat)[0]):
-        dist_mat[i,:] = dist_mat[i,:] + (ParameterBeam._mu[i].numpy())
+        dist_mat[i,:] = dist_mat[i,:] + mu_mat[i]
     # Make the dictionary
     dist = particles_to_dist(dist_mat,ParameterBeam.energy,ParameterBeam.total_charge)
     return dist

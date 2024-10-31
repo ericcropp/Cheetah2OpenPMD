@@ -73,7 +73,8 @@ def ParameterBeam_to_Dist(n,ParameterBeam):
     Returns: dictionary specifying the beam distribution
     """
     # Get the covariance matrix and make a distribution
-    dist_mat = Gaussian_Dist_From_Cov_Mat(n,(ParameterBeam._cov.numpy())[:6,:6]) 
+    cov_mat = np.squeeze(ParameterBeam._cov.numpy())[:6,:6]
+    dist_mat = Gaussian_Dist_From_Cov_Mat(n,cov_mat) 
 
     # Add back the mean in each dimension
     for i in range(np.shape(dist_mat)[0]):
